@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { ReservacionCard } from '../../components/reservacion/ReservacionCard';
+import { PostReservacion } from '../../components/reservacion/PostReservacion';
 import { getReservaciones } from '../../services/';
 
 export const DashboardPage = () => {
@@ -28,6 +29,7 @@ export const DashboardPage = () => {
   return (
     <div>
       <ReservacionCard reservaciones={reservaciones} />
+      <PostReservacion />
     </div>
   );
 };
