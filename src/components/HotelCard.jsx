@@ -1,11 +1,10 @@
 
-import { IF } from '../url'
 
 const HotelCard = ({ hotel }) => {
     return (
         <div >
             <div >
-                <img src={IF + hotel.photo} alt="" />
+             //   <img src={IF + hotel.photo} alt="" />
             </div>
             <div >
                 <h1 >

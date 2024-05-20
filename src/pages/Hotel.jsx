@@ -3,7 +3,7 @@ import HotelCard from "../components/HotelCard"
 import { useContext, useEffect, useState } from "react"
 import { Link, useLocation } from "react-router-dom"
 
-const Hotel = () => {
+export const Hotel = () => {
 
     const { search } = useLocation()
     const [posts, setPosts] = useState([])
@@ -48,4 +48,4 @@ const Hotel = () => {
     )
 }
 
-export default Home
+export default Hotel
