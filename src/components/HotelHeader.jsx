@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../pages/hotel/hotel.css';
 
-const images = [
+import paisaje1 from '../assets/img/paisaje1.jpg';
+import paisaje2 from '../assets/img/paisaje2.jpg';
+import paisaje3 from '../assets/img/paisaje3.jpg';
 
-    "../assets/img/paisaje1.jpg"
-];
+const images = [paisaje1, paisaje2, paisaje3];
 
 export const HotelHeader = () => {
 
@@ -16,14 +17,14 @@ export const HotelHeader = () => {
         const interval = setInterval(() => {
 
             setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-        }, 10000);
+        }, 3500);
 
         return () => clearInterval(interval);
     }, []
-);
+    );
 
     const handleCreateHotel = () => {
-        
+
         navigate('/create');
     };
 

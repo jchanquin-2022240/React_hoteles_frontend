@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import HotelHeader from '../../components/HotelHeader';
 import HotelCard from '../../components/HotelCard';
 import { getHotels } from '../../services/api';
 
 export const Hotel = () => {
-
     const [hotels, setHotels] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchHotels = async () => {
@@ -22,11 +23,9 @@ export const Hotel = () => {
         fetchHotels();
     }, []);
 
-    if (loading) return <p>Loading hotels...</p>;
-    if (error) return <p>Error loading hotels: {error}</p>;
-
     const handleHotelClick = (hotelId) => {
-        navigate(`/hotel-details/${hotelId}`); 
+        
+        navigate(`/hotelDetails/${hotelId}`);
     };
 
     if (loading) return <p>Loading hotels...</p>;
@@ -36,7 +35,7 @@ export const Hotel = () => {
         <div className="hotel-list">
             <HotelHeader />
             {hotels.map((hotel) => (
-                <div key={hotel._id} onClick={() => handleHotelClick(hotel._id)}> 
+                <div key={hotel._id} onClick={() => handleHotelClick(hotel._id)} className="hotel-card-wrapper">
                     <HotelCard hotel={hotel} />
                 </div>
             ))}
