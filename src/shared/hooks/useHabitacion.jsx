@@ -16,9 +16,4 @@ export const useHabitacion = () => {
 
         return habitacionData.data;
     }
-
-    return {
-        habitaciones,
-        obtenerHabitaciones
-    }
 }

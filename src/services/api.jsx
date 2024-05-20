@@ -7,7 +7,7 @@ const apiClient = axios.create({
 
 export const getHabitaciones = async () => {
     try {
-        return await apiClient.get('/habitacion/')
+        return await apiClient.get('/habitaciones/')
     } catch (e) {
         return{
             error: true,
@@ -18,7 +18,7 @@ export const getHabitaciones = async () => {
 
 export const postHabitacion = async (data) => {
     try {
-        return await apiClient.post('/habitacion', data)
+        return await apiClient.post('/habitaciones', data)
     } catch (e) {
         return{
             error: true,

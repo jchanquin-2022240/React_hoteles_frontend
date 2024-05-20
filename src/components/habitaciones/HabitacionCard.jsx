@@ -1,10 +1,13 @@
 import React from "react";
 import toast from 'react-hot-toast';
-import './habitacionCard.css';
+//import './habitacionCard.css';
 
 export const HabitacionCard = ({ habitaciones }) => {
+    habitaciones = Array.isArray(habitaciones) ? habitaciones : [];
+    console.log("habitacionesCard", habitaciones)
     if (habitaciones.length === 0) {
         return <div className="no-habitaciones">No hay habitaciones disponibles</div>;
+
     }
 
     const handleUpdateClick = () => {

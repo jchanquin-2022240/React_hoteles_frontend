@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { PostHabitacion } from '../components/habitacion/PostHabitacion';
-import { HabitacionCard } from '../components/habitacion/HabitacionCard';
-import { getHabitaciones } from '../services/';
+import { PostHabitacion } from '../../components/habitaciones/PostHabitacion';
+import { HabitacionCard } from '../../components/habitaciones/HabitacionCard';
+import { getHabitaciones } from '../../services';
 
 export const DashboardPage = () => {
   const [habitaciones, setHabitaciones] = useState([]);
