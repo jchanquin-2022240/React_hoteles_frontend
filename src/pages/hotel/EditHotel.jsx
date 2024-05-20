@@ -3,7 +3,7 @@ import React from 'react';
 export const EditHotel = () => {
     return (
         <div>
-            <h2>Create Hotel</h2>
+            <h2>Edit Hotel</h2>
         </div>
     );
 };

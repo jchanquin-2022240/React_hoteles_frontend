@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { createHotel } from '../../services/api';
 
 export const CreateHotel = () => {
+
     const [hotel, setHotel] = useState({
         nameHotel: '',
         photo: '',
@@ -12,8 +14,10 @@ export const CreateHotel = () => {
     });
 
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
+        
         const { name, value } = e.target;
         setHotel({
             ...hotel,
@@ -29,17 +33,15 @@ export const CreateHotel = () => {
             const response = await createHotel(hotel);
             setError(null);
             console.log('Hotel created successfully:', response);
+            navigate('/hotel');
         } catch (e) {
 
             if (e.response && e.response.status === 400) {
-
                 const validationErrors = e.response.data.errors;
                 if (validationErrors && Array.isArray(validationErrors)) {
-
                     const errorMsg = validationErrors.map(err => err.msg).join(', ');
                     setError(`Validation error: ${errorMsg}`);
                 } else {
-                    
                     setError(e.response.data.msg || 'Validation error. Please check your input.');
                 }
             } else {
@@ -48,6 +50,7 @@ export const CreateHotel = () => {
             console.error(e);
         }
     };
+
     return (
         <form onSubmit={handleSubmit}>
             <div>

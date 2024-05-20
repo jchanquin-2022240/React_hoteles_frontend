@@ -57,7 +57,7 @@ export const getHotels = async () => {
 
 export const getHotelsDetails = async (id) => {
     try {
-        const response = await apiClient.get(`/hotel/${id}`);
+        const response = await apiClient.get(`/hotelDetails/${id}`);
         return response.data;
     } catch (e) {
         return {
