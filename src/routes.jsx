@@ -1,6 +1,6 @@
 //import { DashboardPage } from "./pages/dashboard";
 //import { AuthPage } from "./pages/auth";
-import { Hotel } from "./pages/Hotel"
+import { Hotel } from "./pages/hotel/Hotel"
 
 const routes = [
     //  { path: '/auth', element: <AuthPage /> },
