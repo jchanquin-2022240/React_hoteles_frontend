@@ -24,16 +24,22 @@ export const useRegister = () => {
             );
         }
 
-        const { userDetails } = response.data;
-
-        localStorage.setItem('user', JSON.stringify(userDetails));
+        const { user } = response.data;
+        console.log(user, "alñksdjfalkdf")
+        if (user) {
+            localStorage.setItem('user', JSON.stringify(user));
+        }else {
+            localStorage.removeItem('user');
+        }
 
         navigate('/')
 
     }
 
-    return (
+    return {
+
         register,
         isLoading
-    )
+        
+    }
 }
