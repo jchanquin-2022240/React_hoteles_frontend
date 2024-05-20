@@ -1,8 +1,9 @@
 import React from 'react';
-import '../pages/hotel/hotel.css';
 import PropTypes from 'prop-types';
+import "../pages/hotel/hotel.css"
 
 export const HotelCard = ({ hotel }) => {
+    
     return (
         <div className="hotel-card">
             <div className="hotel-card-header">

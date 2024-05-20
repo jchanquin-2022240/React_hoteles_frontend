@@ -4,9 +4,7 @@ import '../pages/hotel/hotel.css';
 
 const images = [
 
-    './assets/img/paisaje1.jpg',
-    './assets/img/paisaje2.jpg',
-    './assets/img/paisaje3.jpg'
+    "../assets/img/paisaje1.jpg"
 ];
 
 export const HotelHeader = () => {
@@ -21,7 +19,8 @@ export const HotelHeader = () => {
         }, 10000);
 
         return () => clearInterval(interval);
-    }, []);
+    }, []
+);
 
     const handleCreateHotel = () => {
         

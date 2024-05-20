@@ -25,14 +25,21 @@ export const Hotel = () => {
     if (loading) return <p>Loading hotels...</p>;
     if (error) return <p>Error loading hotels: {error}</p>;
 
+    const handleHotelClick = (hotelId) => {
+        navigate(`/hotel-details/${hotelId}`); 
+    };
+
+    if (loading) return <p>Loading hotels...</p>;
+    if (error) return <p>Error loading hotels: {error}</p>;
+
     return (
-        <div>
+        <div className="hotel-list">
             <HotelHeader />
-            <div className="hotel-list">
-                {hotels.map((hotel) => (
-                    <HotelCard key={hotel._id} hotel={hotel} />
-                ))}
-            </div>
+            {hotels.map((hotel) => (
+                <div key={hotel._id} onClick={() => handleHotelClick(hotel._id)}> 
+                    <HotelCard hotel={hotel} />
+                </div>
+            ))}
         </div>
     );
 };
