@@ -69,9 +69,10 @@ export const Login = ({ switchAuthHandler }) => {
   return (
     <div className="container">
       <div className="login-box">
-        <Logo />
+        <div className="login-box-title">
         <h1>Kinal Travels</h1>
         <p>Reserva hoteles, eventos y habitaciones con facilidad, haciendo de cada viaje una experiencia inolvidable.</p>
+        </div>
         <form>
           <div className="input-group">
             <Input
@@ -97,13 +98,14 @@ export const Login = ({ switchAuthHandler }) => {
               validationMessage={passwordValidationMessage}
             />
           </div>
-          <button onClick={handleLogin} disabled={isSubmitButtonDisabled}>
+          <button className="submit" onClick={handleLogin} disabled={isSubmitButtonDisabled}>
             Iniciar sesión
           </button>
+          <hr />
+          <span className="switch-auth" onClick={switchAuthHandler}>
+            No tienes una cuenta? Regístrate
+          </span>
         </form>
-        <span className="switch-auth" onClick={switchAuthHandler}>
-          No tienes una cuenta? Regístrate
-        </span>
       </div>
     </div>
   );
