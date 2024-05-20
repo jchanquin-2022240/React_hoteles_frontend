@@ -28,8 +28,8 @@ export const DashboardPage = () => {
 
   return (
     <div>
+          <PostReservacion />
       <ReservacionCard reservaciones={reservaciones} />
-      <PostReservacion />
     </div>
   );
 };

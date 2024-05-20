@@ -6,7 +6,9 @@ import {
     validateFecha,
     validateFechaFinAfterFechaInicio,
     validateHuespedes
-} from "./validations";
+} from "../../shared/validators";
+
+import "./postReservacion.css";
 
 export const PostReservacion = () => {
     const { postReservacion, isLoading } = usePostReservacion();
@@ -96,53 +98,54 @@ export const PostReservacion = () => {
         !formState.fechaFin.isValid ||
         !formState.huespedes.isValid;
 
-    return (
-        <div>
-            <form>
-                <Input
-                    field="habitacionId"
-                    label="Habitacion"
-                    value={formState.habitacionId.value}
-                    onChangeHandler={handleInputValueChange}
-                    type="text"
-                    onBlurHandler={handleInputValidationOnBlur}
-                    showErrorMessage={formState.habitacionId.showError}
-                    validationMessage="Por favor ingrese un ID de habitación válido."
-                />
-                <Input
-                    field="fechaInicio"
-                    label="Fecha de Inicio"
-                    value={formState.fechaInicio.value}
-                    onChangeHandler={handleInputValueChange}
-                    type="date"
-                    onBlurHandler={handleInputValidationOnBlur}
-                    showErrorMessage={formState.fechaInicio.showError}
-                    validationMessage="Por favor ingrese una fecha válida."
-                />
-                <Input
-                    field="fechaFin"
-                    label="Fecha de Fin"
-                    value={formState.fechaFin.value}
-                    onChangeHandler={handleInputValueChange}
-                    type="date"
-                    onBlurHandler={handleInputValidationOnBlur}
-                    showErrorMessage={formState.fechaFin.showError}
-                    validationMessage={formState.fechaFin.isValid ? "Por favor ingrese una fecha válida." : "La fecha de fin debe ser posterior a la fecha de inicio."}
-                />
-                <Input
-                    field="huespedes"
-                    label="Huespedes"
-                    value={formState.huespedes.value}
-                    onChangeHandler={handleInputValueChange}
-                    type="text"
-                    onBlurHandler={handleInputValidationOnBlur}
-                    showErrorMessage={formState.huespedes.showError}
-                    validationMessage="Por favor ingrese un número de huéspedes válido (1-10)."
-                />
-                <button onClick={handlePostReservacion} disabled={isSubmitButtonDisabled}>
-                    Registrar
-                </button>
-            </form>
-        </div>
-    );
+        return (
+            <div className="post-reservacion-container">
+                <h2>Registrar Reservación</h2>
+                <form>
+                    <Input
+                        field="habitacionId"
+                        label="Habitación"
+                        value={formState.habitacionId.value}
+                        onChangeHandler={handleInputValueChange}
+                        type="text"
+                        onBlurHandler={handleInputValidationOnBlur}
+                        showErrorMessage={formState.habitacionId.showError}
+                        validationMessage="Por favor ingrese un ID de habitación válido."
+                    />
+                    <Input
+                        field="fechaInicio"
+                        label="Fecha de Inicio"
+                        value={formState.fechaInicio.value}
+                        onChangeHandler={handleInputValueChange}
+                        type="date"
+                        onBlurHandler={handleInputValidationOnBlur}
+                        showErrorMessage={formState.fechaInicio.showError}
+                        validationMessage="Por favor ingrese una fecha válida."
+                    />
+                    <Input
+                        field="fechaFin"
+                        label="Fecha de Fin"
+                        value={formState.fechaFin.value}
+                        onChangeHandler={handleInputValueChange}
+                        type="date"
+                        onBlurHandler={handleInputValidationOnBlur}
+                        showErrorMessage={formState.fechaFin.showError}
+                        validationMessage={formState.fechaFin.isValid ? "Por favor ingrese una fecha válida." : "La fecha de fin debe ser posterior a la fecha de inicio."}
+                    />
+                    <Input
+                        field="huespedes"
+                        label="Huéspedes"
+                        value={formState.huespedes.value}
+                        onChangeHandler={handleInputValueChange}
+                        type="text"
+                        onBlurHandler={handleInputValidationOnBlur}
+                        showErrorMessage={formState.huespedes.showError}
+                        validationMessage="Por favor ingrese un número de huéspedes válido (1-10)."
+                    />
+                    <button onClick={handlePostReservacion} disabled={isSubmitButtonDisabled}>
+                        Crear Reservación
+                    </button>
+                </form>
+            </div>
+        );
 };
