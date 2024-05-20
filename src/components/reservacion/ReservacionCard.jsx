@@ -36,10 +36,10 @@ export const ReservacionCard = ({ reservaciones }) => {
                         <label><i className="icon">📅</i>Fecha De Fin:</label>
                         <div>{new Date(reservacion.fechaFin).toLocaleDateString()}</div>
                     </div>
-                    <div>
+                    {/*<div>
                         <label><i className="icon">🔖</i>Estado:</label>
                         <div>{reservacion.estado}</div>
-                    </div>
+            </div>*/}
                     <div>
                         <label><i className="icon">💵</i>Precio Total:</label>
                         <div>${reservacion.precioReservacion}</div>
