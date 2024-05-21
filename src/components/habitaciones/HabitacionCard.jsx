@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React from "react";
 import toast from 'react-hot-toast';
 //import './habitacionCard.css';
@@ -24,8 +26,8 @@ export const HabitacionCard = ({ habitaciones }) => {
             {habitaciones.map((habitacion, index) => (
                 <div key={index} className="habitacion-card">
                     <div>
-                        <label>Nombre:</label>
-                        <div>{habitacion.nombre}</div>
+                        <label>Número:</label>
+                        <div>{habitacion.numero}</div>
                     </div>
                     <div>
                         <label>Tipo:</label>
@@ -38,6 +40,10 @@ export const HabitacionCard = ({ habitaciones }) => {
                     <div>
                         <label>Precio:</label>
                         <div>${habitacion.precio}</div>
+                    </div>
+                    <div>
+                        <label>Hotel:</label>
+                        <div>${habitacion.idHotel}</div>
                     </div>
                     <button className="update" onClick={handleUpdateClick}>Actualizar</button>
                     <button className="delete" onClick={handleDeleteClick}>Eliminar</button>
