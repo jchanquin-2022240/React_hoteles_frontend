@@ -1,6 +1,7 @@
 
 /* eslint-disable react/prop-types */
 import { useState } from "react";
+import { Logo } from "./Logo";
 import { Input } from "./Input";
 import {
     emailValidationMessage,

@@ -8,9 +8,8 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use(
     (config) => {
         const userDetails = localStorage.getItem('user')
-
         if (userDetails) {
-            const token = JSON.parse(userDetails).token
+            const token = JSON.parse(userDetails || {}).token
             config.headers.Authorization = `Bearer ${token}`
         }
         return config
@@ -22,9 +21,9 @@ apiClient.interceptors.request.use(
 
 export const login = async (data) => {
     try {
-        console.log({data})
+        console.log({ data })
         return await apiClient.post('/auth/login', data)
-        
+
     } catch (e) {
         return {
             error: true,
@@ -35,7 +34,6 @@ export const login = async (data) => {
 
 export const register = async (data) => {
     try {
-        console.log({data})
         return await apiClient.post('/user/register', data)
     } catch (e) {
         return {
@@ -44,3 +42,28 @@ export const register = async (data) => {
         }
     }
 }
+
+export const getHotels = async () => {
+    try {
+        const response = await apiClient.get('/hotel/');
+        return response.data;
+    } catch (e) {
+        return {
+            error: true,
+            e
+        };
+    }
+};
+
+export const createHotel = async (data) => {
+    try {
+        const response = await apiClient.post('/hotel/create', data);
+        return response.data;
+    } catch (e) {
+        return {
+            error: true,
+            e
+        };
+    }
+}
+
