@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { getHabitaciones as getHabitacionesRequest } from '../../services/index';
