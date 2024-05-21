@@ -1,84 +1,47 @@
-import { useNavigate, useParams } from "react-router-dom"
-import axios from "axios"
-import { URL, IF } from "../url"
-import { useContext, useEffect, useState } from "react"
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { getHotelsDetails } from '../../services/api';
+import '../hotel/hotel.css';
 
-const HotelDetails = () => {
+export const HotelDetails = () => {
 
-    const postId = useParams().id
-    const [post, setPost] = useState({})
-    const [loader, setLoader] = useState(false)
-    const navigate = useNavigate()
-
-    const fetchPost = async () => {
-
-
-    }
-
-    const handleDeletePost = async () => {
-
-
-
-    }
+    const { id } = useParams();
+    const [hotel, setHotel] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
+        const fetchHotelDetails = async () => {
+            const result = await getHotelsDetails(id);
+            if (result.error) {
+                setError(result.e.message);
+            } else {
+                setHotel(result.hotel);
+            }
+            setLoading(false);
+        };
+        fetchHotelDetails();
+    }, [id]);
 
-        fetchPost()
-
-    }, [postId])
-
-    const fetchPostComments = async () => {
-
-        setLoader(true)
-
-    }
-
-    useEffect(() => {
-
-        fetchPostComments()
-
-    }, [postId])
-
-    const postComment = async (e) => {
-
-        e.preventDefault()
-
-    }
+    if (loading) return <p>Loading hotel details...</p>;
+    if (error) return <p>Error loading hotel details: {error}</p>;
 
     return (
-        <div>
-            {loader ? <div className="h-[80vh] flex justify-center items-center w-full"><Loader /></div> : <div className="px-8 md:px-[200px] mt-8">
-                <div className="flex justify-between items-center">
-                    <h1 className="text-2xl font-bold text-black md:text-3xl">{post.title}</h1>
-
-                </div>
-                <div className="flex items-center justify-between mt-2 md:mt-4">
-                    <p>@{post.username}</p>
-                    <div className="flex space-x-2">
-                        <p>{new Date(post.updatedAt).toString().slice(0, 15)}</p>
-                        <p>{new Date(post.updatedAt).toString().slice(16, 24)}</p>
-                    </div>
-                </div>
-                <img src={IF + post.photo} className="w-full  mx-auto mt-8" alt="" />
-                <p className="mx-auto mt-8">{post.desc}</p>
-                <div className="flex items-center mt-8 space-x-4 font-semibold">
-                    <p>Categorias:</p>
-                    <div className="flex justify-center items-center space-x-2">
-                        {post.categories?.map((c, i) => (
-                            <>
-                                <div key={i} className="bg-gray-300 rounded-lg px-3 py-1">{c}</div>
-                            </>
-                        ))}
-                    </div>
-                </div>
-                <div className="w-full flex flex-col mt-4 md:flex-row">
-                    <input onChange={(e) => setComment(e.target.value)} type="text" placeholder="Escribe un comentario" className="md:w-[80%] outline-none py-2 px-4 mt-4 md:mt-0" />
-                    <button onClick={postComment} className="bg-black text-sm text-white px-2 py-2 md:w-[20%] mt-4 md:mt-0">Agregar comentario</button>
-                </div>
-            </div>}
-
+        <div className="hotel-details">
+            {hotel && (
+                <>
+                    <h1>{hotel.nameHotel}</h1>
+                    <img src={hotel.photo} alt={hotel.nameHotel} className="hotel-photo" />
+                    <p><strong>Description:</strong> {hotel.description}</p>
+                    <p><strong>Installations:</strong> {hotel.installations}</p>
+                    <p><strong>Location:</strong> {hotel.location}</p>
+                    <p><strong>Category:</strong> {hotel.category}</p>
+                    <p><strong>Status:</strong> {hotel.status ? "Open" : "Closed"}</p>
+                    <p><strong>Bedrooms:</strong> {hotel.bedrooms.length}</p>
+                </>
+            )}
         </div>
-    )
-}
+    );
+};
 
-export default HotelDetails
+export default HotelDetails;
