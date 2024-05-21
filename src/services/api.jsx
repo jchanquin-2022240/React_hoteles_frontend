@@ -30,6 +30,18 @@ export const login = async (data) => {
         }
     }
 }
+
+export const register = async (data) => {
+    try {
+        console.log({data})
+        return await apiClient.post('/user/register', data)
+    } catch (e) {
+        return {
+            error: true,
+            e
+        }
+    }
+}
 export const getHabitaciones = async () => {
     try {
         return await apiClient.get('/habitaciones/')
