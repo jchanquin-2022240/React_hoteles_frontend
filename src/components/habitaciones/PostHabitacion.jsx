@@ -7,8 +7,7 @@ import {
     validateHabitacionCapacidad,
     validateHabitacionPrecio,
 } from "../../shared/validators";
-
-//import "./postHabitacion.css";
+import "./postHabitacion.css";
 
 export const PostHabitacion = () => {
     const { postHabitacion, isLoading } = usePostHabitacion();
