@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const apiClient = axios.create({
     baseURL: 'http://127.0.0.1:3000/hoteles/v1',
-    timeout: 5000
+    timeout: 2000
 })
 
 apiClient.interceptors.request.use(
@@ -23,20 +23,29 @@ export const login = async (data) => {
     try {
         console.log({ data })
         return await apiClient.post('/auth/login', data)
-
     } catch (e) {
-        return {
+        return{
+            error: true,
+            e
+        }
+    }
+}
+export const getHabitaciones = async () => {
+    try {
+        return await apiClient.get('/habitaciones/')
+    } catch (e) {
+        return{
             error: true,
             e
         }
     }
 }
 
-export const register = async (data) => {
+export const postHabitacion = async (data) => {
     try {
-        return await apiClient.post('/user/register', data)
+        return await apiClient.post('/habitaciones', data)
     } catch (e) {
-        return {
+        return{
             error: true,
             e
         }
