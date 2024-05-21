@@ -43,7 +43,7 @@ export const HabitacionCard = ({ habitaciones }) => {
                     </div>
                     <div>
                         <label>Hotel:</label>
-                        <div>${habitacion.idHotel}</div>
+                        <div>{habitacion.idHotel}</div>
                     </div>
                     <button className="update" onClick={handleUpdateClick}>Actualizar</button>
                     <button className="delete" onClick={handleDeleteClick}>Eliminar</button>
