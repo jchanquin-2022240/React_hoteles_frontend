@@ -4,7 +4,7 @@ import { Hotel } from "./pages/hotel/Hotel";
 
 const routes = [
     {path: '/auth', element: <AuthPage/>},
-    {path: "/", element: <DashboardPage/>},
+    {path: "/", element: <Hotel/>},
     {path: "/hotel", element: <Hotel/>}
 ]
 
