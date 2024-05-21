@@ -2,21 +2,24 @@
 import React, { useEffect, useState } from 'react';
 import { PostHabitacion } from '../../components/habitaciones/PostHabitacion';
 import { HabitacionCard } from '../../components/habitaciones/HabitacionCard';
-import { getHabitaciones } from '../../services';
+import { habitacionesByHotelId } from '../../services';
+import { useParams } from 'react-router-dom';
 
 export const HabitacionesPage = () => {
   const [habitaciones, setHabitaciones] = useState([]);
-
+  console.log('Habitaciones:', habitaciones)
+  const id = useParams().id;
   useEffect(() => {
     const fetchHabitaciones = async () => {
       try {
-        const response = await getHabitaciones();
-        console.log('Datos obtenidos', response.data);
+        const response = await habitacionesByHotelId(id);
+        console.log('Datos obtenidos', response);
         if (!response.error) {
-          setHabitaciones(response.data.habitaciones || []);
-          console.log('Habitaciones update: ', response.data.habitaciones);
+          console.log(response)
+          setHabitaciones(response.habitaciones || []);
+          console.log('Habitaciones update: ', response.habitaciones);
         } else {
-          console.log('Error:', response.data);
+          console.log('Error:', response);
         }
       } catch (error) {
         console.log('Error fetching habitaciones:', error);

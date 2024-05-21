@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import HotelHeader from '../../components/HotelHeader';
 import HotelCard from '../../components/HotelCard';
-import { getHotels } from '../../services/api';
+import { getHotels, habitacionesByHotelId} from '../../services/api';
 
 export const Hotel = () => {
 
@@ -29,9 +29,9 @@ export const Hotel = () => {
         
     }, []);
 
-    const handleHotelClick = (hotelId) => {
-        
-        navigate(`/hotelDetails/${hotelId}`);
+    const handleHotelClick = (id) => {
+
+        navigate(`/hotel/habitaciones/${id}`);
     };
 
     if (loading) return <p>Loading hotels...</p>;

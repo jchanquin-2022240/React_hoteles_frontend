@@ -42,16 +42,17 @@ export const register = async (data) => {
         }
     }
 }
-export const getHabitaciones = async () => {
-    try {
-        return await apiClient.get('/habitaciones/')
-    } catch (e) {
-        return{
-            error: true,
-            e
-        }
-    }
-}
+
+// export const getHabitaciones = async () => {
+//     try {
+//         return await apiClient.get('/habitaciones/')
+//     } catch (e) {
+//         return{
+//             error: true,
+//             e
+//         }
+//     }
+// }
 
 export const postHabitacion = async (data) => {
     try {
@@ -99,4 +100,17 @@ export const createHotel = async (data) => {
         };
     }
 }
+
+export const habitacionesByHotelId = async (id) => {
+    try {
+        const response = await apiClient.get(`/habitaciones/hotel/habitaciones/${id}`);
+        return response.data; // Devuelve los datos de la respuesta
+    } catch (e) {
+        console.error('Error fetching habitaciones:', e);
+        return {
+            error: true,
+            message: e.message
+        };
+    }
+};
 

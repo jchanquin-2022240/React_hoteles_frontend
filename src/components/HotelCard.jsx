@@ -4,6 +4,11 @@ import "../pages/hotel/hotel.css"
 
 export const HotelCard = ({ hotel }) => {
     
+    const handleHotelClick = (id) => {
+
+        navigate(`/hotel/habitaciones/${id}`);
+    };
+
     return (
         <div className="hotel-card">
             <div className="hotel-card-header">
@@ -19,6 +24,9 @@ export const HotelCard = ({ hotel }) => {
                     <p>Installations: {hotel.installations}</p>
                     <p>Status: {hotel.status ? "Open" : "Closed"}</p>
                     <p>Bedrooms: {hotel.bedrooms.length}</p>
+                    <button key={hotel._id} onClick={() => handleHotelClick(hotel._id)}>
+                        ver habitaciones
+                    </button>
                 </div>
             </div>
         </div>
