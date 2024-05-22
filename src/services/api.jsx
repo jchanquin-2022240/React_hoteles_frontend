@@ -152,3 +152,28 @@ export const reservacionesByHabitacionId = async (id) => {
     }
 };
 
+
+/* new things */
+
+export const deleteReservacion = async (id) => {
+    try {
+        return await apiClient.delete(`/reservacion/${id}`);
+    } catch (e) {
+        return {
+            error: true,
+            e
+        }
+    }
+}
+
+export const updateReservacion = async (id, data) => {
+    try {
+        return await apiClient.put(`/reservacion/${id}`, data);
+    } catch (e) {
+        return {
+            error: true,
+            e
+        }
+    }
+}
+
