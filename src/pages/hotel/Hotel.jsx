@@ -31,7 +31,7 @@ export const Hotel = () => {
 
     const handleHotelClick = (id) => {
 
-        navigate(`/hotel/habitaciones/${id}`);
+        navigate(`/hotel/${id}`);
     };
 
     if (loading) return <p>Loading hotels...</p>;

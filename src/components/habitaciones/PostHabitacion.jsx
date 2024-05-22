@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { Input } from "../Input";
 import { usePostHabitacion } from "../../shared/hooks";
 import {
@@ -6,11 +7,11 @@ import {
     validateHabitacionCapacidad,
     validateHabitacionPrecio,
     validateHabitacionNumero,
-    validateHabitacionIdHotel
 } from "../../shared/validators";
 import "./postHabitacion.css";
 
 export const PostHabitacion = () => {
+    const { id: idHotel } = useParams(); // Obtener el id del hotel desde los parámetros de la URL
     const { postHabitacion, isLoading } = usePostHabitacion();
 
     const [formState, setFormState] = useState({
@@ -30,11 +31,6 @@ export const PostHabitacion = () => {
             showError: false,
         },
         precio: {
-            value: "",
-            isValid: false,
-            showError: false,
-        },
-        idHotel: {
             value: "",
             isValid: false,
             showError: false,
@@ -66,9 +62,6 @@ export const PostHabitacion = () => {
             case "precio":
                 isValid = validateHabitacionPrecio(value);
                 break;
-            case "idHotel":
-                isValid = validateHabitacionIdHotel(value);
-                break;
             default:
                 break;
         }
@@ -84,13 +77,12 @@ export const PostHabitacion = () => {
 
     const handlePostHabitacion = (event) => {
         event.preventDefault();
-        console.log('Formulario de habitación', formState);
         postHabitacion(
             formState.numero.value,
             formState.tipo.value,
             formState.capacidad.value,
             formState.precio.value,
-            formState.idHotel.value
+            idHotel // Pasar el id del hotel al postHabitacion
         );
     };
 
@@ -99,8 +91,7 @@ export const PostHabitacion = () => {
         !formState.numero.isValid ||
         !formState.tipo.isValid ||
         !formState.capacidad.isValid ||
-        !formState.precio.isValid
-        !formState.idHotel.isValid;
+        !formState.precio.isValid;
 
     return (
         <div className="post-habitacion-container">
@@ -116,16 +107,18 @@ export const PostHabitacion = () => {
                     showErrorMessage={formState.numero.showError}
                     validationMessage="Por favor ingrese un número de habitación válido."
                 />
-                <Input
-                    field="tipo"
-                    label="Tipo"
+                <select
+                    id="tipo"
+                    name="tipo"
                     value={formState.tipo.value}
-                    onChangeHandler={handleInputValueChange}
-                    type="text"
-                    onBlurHandler={handleInputValidationOnBlur}
-                    showErrorMessage={formState.tipo.showError}
-                    validationMessage="Por favor ingrese un tipo de habitación válido."
-                />
+                    onChange={(e) => handleInputValueChange(e.target.value, 'tipo')}
+                    onBlur={(e) => handleInputValidationOnBlur(e.target.value, 'tipo')}
+                >
+                    <option value="">Seleccione un tipo</option>
+                    <option value="individual">Individual</option>
+                    <option value="doble">Doble</option>
+                    <option value="suite">Suite</option>
+                </select>
                 <Input
                     field="capacidad"
                     label="Capacidad"
@@ -145,16 +138,6 @@ export const PostHabitacion = () => {
                     onBlurHandler={handleInputValidationOnBlur}
                     showErrorMessage={formState.precio.showError}
                     validationMessage="Por favor ingrese un precio válido."
-                />
-                <Input
-                    field="idHotel"
-                    label="Id Hotel"
-                    value={formState.idHotel.value}
-                    onChangeHandler={handleInputValueChange}
-                    type="text"
-                    onBlurHandler={handleInputValidationOnBlur}
-                    showErrorMessage={formState.idHotel.showError}
-                    validationMessage="Por favor ingrese un id de hotel válido."
                 />
                 <button onClick={handlePostHabitacion} disabled={isSubmitButtonDisabled}>
                     Crear Habitación

@@ -104,7 +104,7 @@ export const createHotel = async (data) => {
 
 export const habitacionesByHotelId = async (id) => {
     try {
-        const response = await apiClient.get(`/habitaciones/hotel/habitaciones/${id}`);
+        const response = await apiClient.get(`/habitaciones/hotel/${id}`);
         return response.data; // Devuelve los datos de la respuesta
     } catch (e) {
         console.error('Error fetching habitaciones:', e);

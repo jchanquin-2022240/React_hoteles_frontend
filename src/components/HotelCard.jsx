@@ -6,7 +6,7 @@ export const HotelCard = ({ hotel }) => {
     
     const handleHotelClick = (id) => {
 
-        navigate(`/hotel/habitaciones/${id}`);
+        navigate(`/hotel/${id}`);
     };
 
     return (
