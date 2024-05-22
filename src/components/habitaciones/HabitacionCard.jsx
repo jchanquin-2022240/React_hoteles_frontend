@@ -39,10 +39,6 @@ export const HabitacionCard = ({ habitaciones }) => {
                         <label><i className="icon">💵</i>Precio:</label>
                         <div>${habitacion.precio}</div>
                     </div>
-                    <div>
-                        <label><i className="icon">🏨</i>Hotel:</label>
-                        <div>{habitacion.idHotel}</div>
-                    </div>
                     <button className="update" onClick={handleUpdateClick}>Actualizar</button>
                     <button className="delete" onClick={handleDeleteClick}>Eliminar</button>
                 </div>
