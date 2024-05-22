@@ -1,15 +1,14 @@
-
 import { useState } from "react";
-import { deleteHabitacion as deleteHabitacionRequest } from "../../services/api";
+import { deleteReservacion as deleteReservacionRequest } from "../../services/api";
 import toast from "react-hot-toast";
 
-export const useDeleteHabitacion = () => {
+export const useDeleteReservacion = () => {
     const [isLoading, setIsLoading] = useState(false);
 
-    const deleteHabitacion = async (id) => {
+    const deleteReservacion = async (id) => {
         setIsLoading(true);
 
-        const response = await deleteHabitacionRequest(id);
+        const response = await deleteReservacionRequest(id);
 
         setIsLoading(false);
         if (response.error) {
@@ -18,13 +17,13 @@ export const useDeleteHabitacion = () => {
             );
         }
 
-        toast.success('¡Habitación eliminada exitosamente!');
+        toast.success('Reservacion eliminada exitosamente!');
         window.location.reload();
         return response.data;
     };
 
     return {
-        deleteHabitacion,
+        deleteReservacion,
         isLoading
     };
 };

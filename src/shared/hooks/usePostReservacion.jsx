@@ -23,6 +23,9 @@ export const usePostReservacion = () => {
             return toast.error(
                 response.e?.response?.data || 'Ocurrió un error al crear la reservación'
             )
+        }else {
+            toast.success("Reservación creada exitosamente");
+            window.location.reload();
         }
     }
 

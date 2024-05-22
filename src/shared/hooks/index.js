@@ -4,5 +4,7 @@ export { useLogin } from './useLogin.jsx';
 export { useRegister } from './useRegister.jsx';
 export {useReservacion} from './useReservacion.jsx';    
 export {usePostReservacion} from './usePostReservacion.jsx';
-export { useEditHabitacion } from './useEditHabitacion.jsx'
-export { useDeleteHabitacion } from './useDeleteHabitacion.jsx'
+export {useDeleteHabitacion} from './useDeleteHabitacion.jsx';
+export {useEditHabitacion} from './useEditHabitacion.jsx';
+export {useDeleteReservacion} from './useDeleteReservacion.jsx';
+export {useUpdateReservacion} from './useUpdateReservacion.jsx';

@@ -1,7 +1,10 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
 import toast from 'react-hot-toast';
+import { useDeleteReservacion } from "../../shared/hooks/useDeleteReservacion";
+import {UpdateReservacion} from "./UpdateReservacion";
 import './reservacionCard.css';
 
 const calcularPrecioTotal = (habitacionPrecio, fechaInicio, fechaFin) => {
@@ -13,6 +16,10 @@ const calcularPrecioTotal = (habitacionPrecio, fechaInicio, fechaFin) => {
 };
 
 export const ReservacionCard = ({ reservaciones }) => {
+
+    const { deleteReservacion, isLoading: isDeleting } = useDeleteReservacion();
+    const [updatingReservacion, setUpdatingReservacion] = useState(null);
+
     if (reservaciones.length === 0) {
         return <div className="no-reservaciones">No hay reservaciones disponibles</div>;
     }
@@ -21,8 +28,30 @@ export const ReservacionCard = ({ reservaciones }) => {
         toast.error("Necesitas un administrador para actualizar tu reserva");
     };
 
-    const handleDeleteClick = () => {
+    /*const handleDeleteClick = () => {
         toast.error("Comunícate con el administrador para cancelar y eliminar tu reserva");
+    };*/
+
+    const handleEditClick = (reservacion) => {
+        setUpdatingReservacion(reservacion);
+    };
+
+    const handleDeleteClick = async (id) => {
+        const confirmed = window.confirm("¿Estás seguro de que deseas eliminar esta reservación?");
+        if (confirmed) {
+            try {
+                await deleteReservacion(id);
+                if (onReservacionDeleted) {
+                    onReservacionDeleted(id);
+                }
+            } catch (error) {
+                console.error("Error al eliminar la reserva:", error);
+            }
+        }
+    };
+
+    const handleCloseModal = () => {
+        setUpdatingReservacion(null);
     };
 
     return (
@@ -44,11 +73,15 @@ export const ReservacionCard = ({ reservaciones }) => {
                             <label><i className="icon">💵</i>Precio Total:</label>
                             <div>${precioTotal}</div>
                         </div>
-                        <button className="update" onClick={handleUpdateClick}>Actualizar</button>
-                        <button className="delete" onClick={handleDeleteClick}>Eliminar</button>
+                        <button className="update" onClick={() => handleEditClick(reservacion)}>Actualizar</button>
+                        <button className="delete" onClick={() => handleDeleteClick(reservacion._id)} disabled={isDeleting}>Eliminar</button>
                     </div>
                 );
             })}
+
+            {updatingReservacion && (
+                <UpdateReservacion reservacion={updatingReservacion} onClose={handleCloseModal} />
+            )}
         </div>
     );
 };

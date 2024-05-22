@@ -21,6 +21,9 @@ export const usePostHabitacion = () => {
             return toast.error(
                 response.e?.response?.data || 'Ocurrió un error al crear la habitación'
             );
+        }else {
+            toast.success("Habitación creada exitosamente");
+            window.location.reload();
         }
     }
 
