@@ -1,88 +1,188 @@
-.auth-container {
+.container {
+    font-family: 'Poppings', sans-serif;
     width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #000000;
 }
- 
-.login-container, .register-container {
-    width: 500px;
-    margin: 0 auto;
+
+.login-box {
+    background-color: #fefaf3;
+    padding: 45px;
+    border-radius: 15px;
+    box-shadow: 0 0 50px #ff9101;
+    max-width: 800px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.login-box p {
+    margin-bottom: 40px;
+    color: #666;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+    color: #000000
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.input-group input {
+    width: calc(100% - 20px);
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    height: auto;
-    box-shadow: 10px 10px 10px #0b336b;
-    padding: 25px;
+    font-size: 16px;
 }
- 
-.register-container {
-    height: 500px;
-}
- 
-.auth-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
- 
-.auth-form input {
-    margin: 5px 0;
-    padding: 5px;
-    width: 400px;
-}
- 
-.auth-form button {
-    cursor: pointer;
-    background-color: #0b336b; 
+
+.submit {
+    width: 100%;
+    padding: 10px;
+    background-color: #000;
     color: #fff;
     border: none;
-    border-radius: 8px;
-    width: 410px;
-    height: 30px;
-    font-weight: 500;
-    margin-top: 20px;
-    transition: 0.3s;
-    line-height: 10px;
-}
- 
-.auth-form button:hover {
-    opacity: 0.8;
-}
- 
-.auth-form button:disabled {
-    opacity: 0.3;
-}
- 
-.auth-form-label {
-    width: 410px;
-    font-weight: 500;
-}
- 
-.auth-form-logo-container {
-    font-size: 26px;
-    font-weight: bold;
-}
- 
-.auth-form-switch-label {
-    color: #2b7df0;
-    font-weight: bold;
-    font-size: 14px;
-    transition: 0.3s;
+    border-radius: 5px;
     cursor: pointer;
-    padding-top: 10px;
+    font-size: 16px;
 }
- 
-.auth-form-switch-label:hover {
-    opacity: 0.8;
+
+.submit:disabled {
+    background-color: #ccc;
 }
- 
-.auth-form-validation-message {
-    width: 400px;
-    color: red;
+
+hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+.switch-auth {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    color: #333;
+    cursor: pointer;
+}
+
+.switch-auth:hover {
+    margin-left: 5px;
+    color: #333;
+    font-weight: bold;
+}
+
+.container-img img {
+    width: 120px;
+    height: 100%;
+}
+
+.container h1 {
+    color: black;
+    font-weight: bold;
+}
+
+.login-box-title {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Register */
+
+.container-register {
+    font-family: 'Poppings', sans-serif;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+}
+
+.register {
+    background-color: #fefaf3;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 50px #0c9ade;
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+.register h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.input-group-register {
+    margin-bottom: 15px;
+    text-align: left;
+    color: #000000;
+}
+
+.input-group-register label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.input-group-register input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.register .submit {
+    width: 100%;
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.register .submit:disabled {
+    background-color: #ccc;
+}
+
+.switch-auth-register {
+    display: block;
+    margin-top: 20px;
+    color: #333;
+    cursor: pointer;
+}
+
+.switch-auth-register:hover {
+    margin-left: 5px;
+    color: #333;
+    font-weight: bold;
+}
+
+.button-img{
+    display: flex;
+    justify-content: left;
+    background-color: #fefaf3;
+    border: none;
+    width: 40px;
+    height: 40px;
+}
+
+.button-img img{
+    width: 30px;
+    height: 30px;
 }

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { Logo } from "./Logo";
+//import { Logo } from "./Logo";
 import { Input } from "./Input";
 import {
   emailValidationMessage,
@@ -11,7 +11,7 @@ import {
 import { useLogin } from "../shared/hooks";
 
 export const Login = ({ switchAuthHandler }) => {
-  const {login, isLoading} = useLogin();
+  const { login, isLoading } = useLogin();
 
   const [formState, setFormState] = useState({
     email: {
@@ -48,13 +48,13 @@ export const Login = ({ switchAuthHandler }) => {
       default:
         break;
     }
-    setFormState((prevState) =>({
-        ...prevState,
-        [field]:{
-            ...prevState[field],
-            isValid,
-            showError: !isValid
-        }
+    setFormState((prevState) => ({
+      ...prevState,
+      [field]: {
+        ...prevState[field],
+        isValid,
+        showError: !isValid
+      }
     }))
   };
 
@@ -67,36 +67,46 @@ export const Login = ({ switchAuthHandler }) => {
 
   const isSubmitButtonDisabled = isLoading || !formState.password.isValid || !formState.email.isValid
   return (
-    <div className="login-container">
-        <Logo text={'Kinal Travels'}/>
-        <form className="auth-form">
+    <div className="container">
+      <div className="login-box">
+        <div className="login-box-title">
+        <h1>Kinal Travels</h1>
+        <p>Reserva hoteles, eventos y habitaciones con facilidad, haciendo de cada viaje una experiencia inolvidable.</p>
+        </div>
+        <form>
+          <div className="input-group">
             <Input
-                field='email'
-                label='Email'
-                value={formState.email.value}
-                onChangeHandler={handleInputValueChange}
-                type='text'
-                onBlurHandler={handleInputValidationOnBlur}
-                showErrorMessage={formState.email.showError}
-                validationMessage={emailValidationMessage}
+              field="email"
+              label="Correo electrónico"
+              value={formState.email.value}
+              onChangeHandler={handleInputValueChange}
+              type="text"
+              onBlurHandler={handleInputValidationOnBlur}
+              showErrorMessage={formState.email.showError}
+              validationMessage={emailValidationMessage}
             />
+          </div>
+          <div className="input-group">
             <Input
-                field='password'
-                label='Password'
-                value={formState.password.value}
-                onChangeHandler={handleInputValueChange}
-                type='password'
-                onBlurHandler={handleInputValidationOnBlur}
-                showErrorMessage={formState.password.showError}
-                validationMessage={passwordValidationMessage}
+              field="password"
+              label="Contraseña"
+              value={formState.password.value}
+              onChangeHandler={handleInputValueChange}
+              type="password"
+              onBlurHandler={handleInputValidationOnBlur}
+              showErrorMessage={formState.password.showError}
+              validationMessage={passwordValidationMessage}
             />
-            <button onClick={handleLogin} disabled={isSubmitButtonDisabled}>
-                Iniciar sesión
-            </button>
+          </div>
+          <button className="submit" onClick={handleLogin} disabled={isSubmitButtonDisabled}>
+            Iniciar sesión
+          </button>
+          <hr />
+          <span className="switch-auth" onClick={switchAuthHandler}>
+            No tienes una cuenta? Regístrate
+          </span>
         </form>
-        <span onClick={switchAuthHandler} className="auth-form-switch-label">
-              No tienes una cuenta? Regístrate
-        </span>
+      </div>
     </div>
   );
 };

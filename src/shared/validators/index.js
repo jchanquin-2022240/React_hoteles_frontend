@@ -1,3 +1,7 @@
+export * from './validateHabitacionCapacidad'
+export * from './validateHabitacionNombre'
+export * from './validateHabitacionPrecio'
+export * from './validateHabitacionTipo'
 export * from './validateEmail'
 export * from './validatePassword'
 export * from './validatePasswordCofirm'

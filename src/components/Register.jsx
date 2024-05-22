@@ -1,7 +1,7 @@
 
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { Logo } from "./Logo";
+//import { Logo } from "./Logo";
 import { Input } from "./Input";
 import {
     emailValidationMessage,
@@ -15,9 +15,10 @@ import {
 } from "../shared/validators";
 import { useRegister } from "../shared/hooks";
 
+
 export const Register = ({ switchAuthHandler }) => {
     const { register, isLoading } = useRegister();
-    console.log(register)
+
     const [formState, setFormState] = useState({
         email: {
             value: "",
@@ -34,7 +35,7 @@ export const Register = ({ switchAuthHandler }) => {
             isValid: false,
             showError: false,
         },
-        passwordConfir: {
+        passwordConfirm: {
             value: "",
             isValid: false,
             showError: false,
@@ -63,7 +64,7 @@ export const Register = ({ switchAuthHandler }) => {
             case "password":
                 isValid = validatePassword(value);
                 break;
-            case "passwordConfir":
+            case "passwordConfirm":
                 isValid = validatePasswordConfirm(formState.password.value, value);
                 break;
             default:
@@ -81,11 +82,10 @@ export const Register = ({ switchAuthHandler }) => {
 
     const handleRegister = (event) => {
         event.preventDefault();
-
         register(
+            formState.username.value,
             formState.email.value,
-            formState.password.value,
-            formState.username.value
+            formState.password.value
         );
     };
 
@@ -94,59 +94,73 @@ export const Register = ({ switchAuthHandler }) => {
         !formState.password.isValid ||
         !formState.email.isValid ||
         !formState.username.isValid ||
-        !formState.passwordConfir.isValid;
+        !formState.passwordConfirm.isValid;
 
     return (
-        <div className="register-container">
-            <Logo text={"Register to Kinal Cast"} />
-            <form className="auth-form">
-                <Input
-                    field="email"
-                    label="Email"
-                    value={formState.email.value}
-                    onChangeHandler={handleInputValueChange}
-                    type="text"
-                    onBlurHandler={handleInputValidationOnBlur}
-                    showErrorMessage={formState.email.showError}
-                    validationMessage={emailValidationMessage}
-                />
-                <Input
-                    field="username"
-                    label="Username"
-                    value={formState.username.value}
-                    onChangeHandler={handleInputValueChange}
-                    type="text"
-                    onBlurHandler={handleInputValidationOnBlur}
-                    showErrorMessage={formState.username.showError}
-                    validationMessage={validateUsernameMessage}
-                />
-                <Input
-                    field="password"
-                    label="Password"
-                    value={formState.password.value}
-                    onChangeHandler={handleInputValueChange}
-                    type="text"
-                    onBlurHandler={handleInputValidationOnBlur}
-                    showErrorMessage={formState.password.showError}
-                    validationMessage={passwordValidationMessage}
-                />
-                <Input
-                    field="passwordConfir"
-                    label="Password Confirmation"
-                    value={formState.passwordConfir.value}
-                    onChangeHandler={handleInputValueChange}
-                    type="text"
-                    onBlurHandler={handleInputValidationOnBlur}
-                    showErrorMessage={formState.passwordConfir.showError}
-                    validationMessage={passwordConfirmationMessage}
-                />
-                <button onClick={handleRegister} disabled={isSubmitButtonDisabled}>
-                    Register
+        <div className="container-register">
+            <div className="register">
+                <button className="button-img" onClick={switchAuthHandler}>
+                    <img src="../../src/assets/img/back.png"/>
                 </button>
-            </form>
-            <span onClick={switchAuthHandler} className="auth-form-switch-label">
-                ¿Ya tienes una cuenta? ¡Inicia sesión acá...!
-            </span>
+                <h1>Registro</h1>
+                <form>
+                    <div className="input-group-register">
+                        <Input
+                            field="email"
+                            label="Correo electrónico"
+                            value={formState.email.value}
+                            onChangeHandler={handleInputValueChange}
+                            type="text"
+                            onBlurHandler={handleInputValidationOnBlur}
+                            showErrorMessage={formState.email.showError}
+                            validationMessage={emailValidationMessage}
+                        />
+                    </div>
+                    <div className="input-group-register">
+                        <Input
+                            field="username"
+                            label="Username"
+                            value={formState.username.value}
+                            onChangeHandler={handleInputValueChange}
+                            type="text"
+                            onBlurHandler={handleInputValidationOnBlur}
+                            showErrorMessage={formState.username.showError}
+                            validationMessage={validateUsernameMessage}
+                        />
+                    </div>
+                    <div className="input-group-register">
+                        <Input
+                            field="password"
+                            label="Contraseña"
+                            value={formState.password.value}
+                            onChangeHandler={handleInputValueChange}
+                            type="password"
+                            onBlurHandler={handleInputValidationOnBlur}
+                            showErrorMessage={formState.password.showError}
+                            validationMessage={passwordValidationMessage}
+                        />
+                    </div>
+                    <div className="input-group-register">
+                        <Input
+                            field="passwordConfirm"
+                            label="Confirmación de contraseña"
+                            value={formState.passwordConfirm.value}
+                            onChangeHandler={handleInputValueChange}
+                            type="password"
+                            onBlurHandler={handleInputValidationOnBlur}
+                            showErrorMessage={formState.passwordConfirm.showError}
+                            validationMessage={passwordConfirmationMessage}
+                        />
+                    </div>
+                    <button className="submit" onClick={handleRegister} disabled={isSubmitButtonDisabled}>
+                        Registrar
+                    </button>
+                </form>
+                <hr />
+                <span className="switch-auth-register" onClick={switchAuthHandler}>
+                    ¿Ya tienes una cuenta? Inicia sesión
+                </span>
+            </div>
         </div>
     );
 };

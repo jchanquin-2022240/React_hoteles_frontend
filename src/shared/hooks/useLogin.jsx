@@ -21,12 +21,11 @@ export const useLogin = () => {
         setIsLoading(false)
         if (response.error) {
             return toast.error(
-                response.e?.response?.data || 'Ocurrió un erro al iniciar sesión'
+                response.e?.response?.data || 'Error al iniciar sesión'
             )
         }
 
         const { user } = response.data
-        console.log(user, "alñksdjfalkdf")
         if (user) {
             
             localStorage.setItem('user', JSON.stringify(user))
