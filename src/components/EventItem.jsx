@@ -29,12 +29,12 @@ export const EventItem = ({ event, handleEdit, handleDelete, handleAddResource, 
 
     return (
         <div key={event._id}>
-            <h2>{event.nameEvent}</h2>
-            <p>{event.descriptionEvent}</p>
-            <p>{new Date(event.date).toLocaleDateString()}</p>
-            <p>{event.startTime} - {event.endingTime}</p>
-            <p>{event.typeEvent}</p>
-            <p>{event.totalPrice}.00Q</p>
+            <h2>Nombre del evento: {event.nameEvent}</h2>
+            <p>Descripcion del evento: {event.descriptionEvent}</p>
+            <p>Fecha del evento: {new Date(event.date).toLocaleDateString()}</p>
+            <p>Hora de inicio: {event.startTime} - {event.endingTime}</p>
+            <p>Hora de finalizacion: {event.typeEvent}</p>
+            <p>Precio total: {event.totalPrice}.00Q</p>
 
             <button onClick={() => handleEdit(event)}>Editar</button>
             <button onClick={() => handleDelete(event._id)}>Eliminar</button>

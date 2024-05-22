@@ -7,6 +7,7 @@ export const EventTypeSelector = ({ value, onChange }) => {
                 value={value}
                 onChange={(e) => onChange(e.target.value, 'typeEvent')}
             >
+                <option value="">Elige una opcion...</option>
                 <option value="Conferencia">Conferencia</option>
                 <option value="Casamiento">Boda</option>
                 <option value="Reunion">Reunión</option>

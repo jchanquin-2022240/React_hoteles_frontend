@@ -9,6 +9,7 @@ import { useResourcesAdd } from '../../shared/hooks/useResourceAdd';
 import { useDeleteResource } from '../../shared/hooks/useDeleteResource';
 import { EventItem } from '../../components/EventItem';
 import { EventUpdateForm } from '../../components/FormUpdateEvent';
+import './eventPage.css';
 
 
 export const EventsPage = () => {
@@ -27,23 +28,61 @@ export const EventsPage = () => {
     }, [getEvents]);
 
     const handleSaveEvent = async (data) => {
-        if (selectedEvent) {
-            await updateEvent(selectedEvent._id, data);
-        } else {
-            await createEvent(data);
+
+        const requiredFields = ['nameEvent', 'descriptionEvent', 'date', 'startTime', 'endingTime', 'typeEvent'];
+        if (!selectedEvent) {
+            requiredFields.push('resources');
         }
+
+        const missingFields = requiredFields.filter(field => !data[field]);
+        if (missingFields.length > 0) {
+            console.error("Faltan campos obligatorios:", missingFields.join(', '));
+            return;
+        }
+
+        if (typeof data.nameEvent !== "string" || !/^[a-zA-Z0-9\s]+$/.test(data.nameEvent)) {
+            console.error("El campo nameEvent debe ser una cadena de texto y no contener caracteres no válidos");
+            return;
+        }
+
+        const timeRegex = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
+        if (!timeRegex.test(data.startTime) || !timeRegex.test(data.endingTime)) {
+            console.error("El formato de la hora de inicio o fin es incorrecto");
+            return;
+        }
+
+        if (selectedEvent) {
+            await updateEvent(selectedEvent._id, {
+                nameEvent: data.nameEvent,
+                descriptionEvent: data.descriptionEvent,
+                date: data.date,
+                startTime: data.startTime,
+                endingTime: data.endingTime,
+                typeEvent: data.typeEvent
+            });
+        } else {
+            await createEvent(
+                data.nameEvent,
+                data.descriptionEvent,
+                data.date,
+                data.startTime,
+                data.endingTime,
+                data.typeEvent,
+                data.resources
+            );
+        }
+
         setSelectedEvent(null);
         setShowForm(false);
         getEvents();
     };
 
     const handleDelete = async (id) => {
-        console.log('handleDelete id:', id);
         await deleteEvent(id);
         getEvents();
     };
 
-    const handleEdit = (event) => { 
+    const handleEdit = (event) => {
         setSelectedEvent(event);
         setShowForm(true);
     };
@@ -61,8 +100,7 @@ export const EventsPage = () => {
     return (
         <div>
             <h1>Eventos</h1>
-            <button onClick={() => setShowForm(true)}>Agregar Evento</button>
-            {showForm && ( 
+            {showForm && (
                 selectedEvent ? (
                     <EventUpdateForm
                         event={selectedEvent}
@@ -76,12 +114,12 @@ export const EventsPage = () => {
                     />
                 )
             )}
-            <div>
+            <div className="event-card-container">
                 {isFetching ? (
                     <p>Cargando eventos...</p>
                 ) : (
                     events.length === 0 ? (
-                        <p>No hay eventos disponibles.</p>
+                        <p className="no-events">No hay eventos disponibles.</p>
                     ) : (
                         events.map(event => (
                             <EventItem
@@ -96,6 +134,11 @@ export const EventsPage = () => {
                     )
                 )}
             </div>
+            {!showForm && ( 
+                <button className="add-event-btn" onClick={() => setShowForm(true)}>
+                    Agregar Evento
+                </button>
+            )}
         </div>
     );
 };
