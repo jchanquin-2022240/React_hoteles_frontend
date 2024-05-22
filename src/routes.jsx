@@ -9,7 +9,6 @@ const routes = [
     { path: '/auth', element: <AuthPage /> },
     { path: "/", element: <Hotel /> },
     { path: "/hotel", element: <Hotel /> },
-    //{ path: "/reservacion", element: <ReservacionesPage /> },
     { path: "/create", element: <CreateHotel /> },
     { path: "/hotel/:id", element: <HabitacionesPage /> },
     { path: "/habitacion/:id", element: <ReservacionesPage /> }

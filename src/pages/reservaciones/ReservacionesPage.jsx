@@ -2,15 +2,18 @@
 import React, { useEffect, useState } from 'react';
 import { ReservacionCard } from '../../components/reservacion/ReservacionCard';
 import { PostReservacion } from '../../components/reservacion/PostReservacion';
-import { habitacionesByHotelId } from '../../services';
+//import { reservacionesByHabitacionId } from '../../services';
+import { getReservaciones as getReservacionesRequest } from '../../services';
+// import { useParams } from 'react-router-dom';
 
 export const ReservacionesPage = () => {
   const [reservaciones, setReservaciones] = useState([]);
-
+  console.log('Reservaciones data:', reservaciones);
+  // const id = useParams().id;
   useEffect(() => {
     const fetchReservaciones = async () => {
       try {
-        const response = await habitacionesByHotelId();
+        const response = await getReservacionesRequest();
         console.log('Datos obtenidos:', response.data);
         if (!response.error) {
           setReservaciones(response.data.reservaciones || []);

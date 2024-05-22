@@ -117,7 +117,7 @@ export const habitacionesByHotelId = async (id) => {
 
 
 
-/*export const getReservaciones = async () => {
+export const getReservaciones = async () => {
     try {
         return await apiClient.get('/reservacion/')
     } catch (e) {
@@ -126,7 +126,7 @@ export const habitacionesByHotelId = async (id) => {
             e
         }
     }
-}*/
+}
 
 export const postReservacion = async (data) => {
     try {

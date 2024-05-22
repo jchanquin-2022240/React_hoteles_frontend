@@ -1,12 +1,11 @@
 /* eslint-disable no-unused-vars */
-
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { habitacionesByHotelId as getReservacionesRequest} from '../../services/index';
-
+//import { getReservaciones as getReservacionesRequest } from "../../services";
 
 export const useReservacion = () => {
     const  [reservaciones, setReservaciones] = useState([]);
+    console.log("reservaciones dataaaaaaaaaaa:", reservaciones)
 
     const obtenerReservaciones = async () => {
         const reservacionData = await getReservacionesRequest();

@@ -33,10 +33,6 @@ export const ReservacionCard = ({ reservaciones }) => {
                 return (
                     <div key={index} className="reservacion-card">
                         <div>
-                            <label><i className="icon">🛏️</i>Habitación:</label>
-                            <div>{reservacion.habitacionId}</div>
-                        </div>
-                        <div>
                             <label><i className="icon">📅</i>Fecha de Inicio:</label>
                             <div>{new Date(reservacion.fechaInicio).toLocaleDateString()}</div>
                         </div>

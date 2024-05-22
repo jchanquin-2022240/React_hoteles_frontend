@@ -75,15 +75,19 @@ export const PostHabitacion = () => {
         }));
     };
 
-    const handlePostHabitacion = (event) => {
+    const handlePostHabitacion = async (event) => {
         event.preventDefault();
-        postHabitacion(
+        const result = await postHabitacion(
             formState.numero.value,
             formState.tipo.value,
             formState.capacidad.value,
             formState.precio.value,
             idHotel // Pasar el id del hotel al postHabitacion
         );
+
+        if (result) {
+            setFormState(initialFormState);
+        }
     };
 
     const isSubmitButtonDisabled =

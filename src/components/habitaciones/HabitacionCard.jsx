@@ -3,13 +3,13 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import toast from 'react-hot-toast';
-//import { navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './habitacionCard.css';
 
 export const HabitacionCard = ({ habitaciones }) => {
-
+    const navigate = useNavigate();
     const handleHabitacionClick = (id) => {
-
+        console.log("id del hotel para reservar", id)
         navigate(`/habitacion/${id}`);
     };
 
@@ -50,7 +50,7 @@ export const HabitacionCard = ({ habitaciones }) => {
                         <div>${habitacion.precio}</div>
                     </div>
                     <button key={habitacion._id} onClick={() => handleHabitacionClick(habitacion._id)}>
-                        ver habitaciones
+                        Reservar
                     </button>
                     <button className="update" onClick={handleUpdateClick}>Actualizar</button>
                     <button className="delete" onClick={handleDeleteClick}>Eliminar</button>

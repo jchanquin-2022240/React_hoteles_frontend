@@ -1,24 +1,19 @@
 import { useState } from "react";
 import { Input } from "../Input";
 import { usePostReservacion } from "../../shared/hooks";
+import { useParams } from 'react-router-dom';
 import {
-    validateHabitacionId,
     validateFecha,
     validateFechaFinAfterFechaInicio,
     validateHuespedes
 } from "../../shared/validators";
-
 import "./postReservacion.css";
 
 export const PostReservacion = () => {
+    const { id: habitacionId } = useParams(); // Obtener el id de la habitación desde los parámetros de la URL
     const { postReservacion, isLoading } = usePostReservacion();
 
     const initialFormState = {
-        habitacionId: {
-            value: "",
-            isValid: false,
-            showError: false,
-        },
         fechaInicio: {
             value: "",
             isValid: false,
@@ -51,9 +46,6 @@ export const PostReservacion = () => {
     const handleInputValidationOnBlur = (value, field) => {
         let isValid = false;
         switch (field) {
-            case "habitacionId":
-                isValid = validateHabitacionId(value);
-                break;
             case "fechaInicio":
                 isValid = validateFecha(value);
                 if (isValid && formState.fechaFin.value) {
@@ -86,12 +78,12 @@ export const PostReservacion = () => {
         event.preventDefault();
         console.log('Formulario de reservación', formState);
         const result = await postReservacion(
-            formState.habitacionId.value,
+            habitacionId, // Pasar el id de la habitación
             formState.fechaInicio.value,
             formState.fechaFin.value,
             formState.huespedes.value
         );
-        
+
         // Si la reservación se crea con éxito, restablece el formulario
         if (result) {
             setFormState(initialFormState);
@@ -100,7 +92,6 @@ export const PostReservacion = () => {
 
     const isSubmitButtonDisabled =
         isLoading ||
-        !formState.habitacionId.isValid ||
         !formState.fechaInicio.isValid ||
         !formState.fechaFin.isValid ||
         !formState.huespedes.isValid;
@@ -109,16 +100,6 @@ export const PostReservacion = () => {
         <div className="post-reservacion-container">
             <h2>Registrar Reservación</h2>
             <form>
-                <Input
-                    field="habitacionId"
-                    label="Habitación"
-                    value={formState.habitacionId.value}
-                    onChangeHandler={handleInputValueChange}
-                    type="text"
-                    onBlurHandler={handleInputValidationOnBlur}
-                    showErrorMessage={formState.habitacionId.showError}
-                    validationMessage="Por favor ingrese un ID de habitación válido."
-                />
                 <Input
                     field="fechaInicio"
                     label="Fecha de Inicio"
