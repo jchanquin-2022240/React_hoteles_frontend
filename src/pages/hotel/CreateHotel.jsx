@@ -1,122 +1,131 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { createHotel } from '../../services/api';
+import "./hotel.css";
 
 export const CreateHotel = () => {
 
-    const [hotel, setHotel] = useState({
+    const [hotelData, setHotelData] = useState({
         nameHotel: '',
-        photo: '',
+        photo: null,
         description: '',
         installations: '',
         location: '',
         category: '⭐',
+        status: true,
     });
 
-    const [error, setError] = useState(null);
+    const [isFormValid, setIsFormValid] = useState(false);
     const navigate = useNavigate();
 
+    useEffect(() => {
+        validateForm();
+    }, [hotelData]);
+
     const handleChange = (e) => {
-        
-        const { name, value } = e.target;
-        setHotel({
-            ...hotel,
-            [name]: value,
-        });
+        const { name, value, type, checked } = e.target;
+        const val = type === 'checkbox' ? checked : value;
+        setHotelData((prevData) => ({
+            ...prevData,
+            [name]: val,
+        }));
+    };
+
+    const handleFileChange = (e) => {
+        setHotelData((prevData) => ({
+            ...prevData,
+            photo: e.target.files[0],
+        }));
+    };
+
+    const validateForm = () => {
+        const { nameHotel, description, installations, location, category } = hotelData;
+        setIsFormValid(nameHotel && description && installations && location && category);
     };
 
     const handleSubmit = async (e) => {
-
         e.preventDefault();
-        try {
+        const formData = new FormData();
+        Object.keys(hotelData).forEach((key) => {
+            formData.append(key, hotelData[key]);
+        });
 
-            const response = await createHotel(hotel);
-            setError(null);
-            console.log('Hotel created successfully:', response);
-            navigate('/hotel');
-        } catch (e) {
+        const result = await createHotel(formData);
 
-            if (e.response && e.response.status === 400) {
-                const validationErrors = e.response.data.errors;
-                if (validationErrors && Array.isArray(validationErrors)) {
-                    const errorMsg = validationErrors.map(err => err.msg).join(', ');
-                    setError(`Validation error: ${errorMsg}`);
-                } else {
-                    setError(e.response.data.msg || 'Validation error. Please check your input.');
-                }
-            } else {
-                setError('There was an error creating the hotel.');
-            }
-            console.error(e);
+        if (!result.error) {
+            console.log('Hotel created successfully:', result);
+            navigate('/');
+        } else {
+            console.error('Error creating hotel:', result.e);
         }
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label>
-                    Name Hotel:
+        <div className="create-hotel-form">
+            <h1>Crear Hotel</h1>
+            <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label htmlFor="nameHotel">Nombre del Hotel:</label>
                     <input
                         type="text"
+                        id="nameHotel"
                         name="nameHotel"
-                        value={hotel.nameHotel}
+                        value={hotelData.nameHotel}
                         onChange={handleChange}
                         required
                     />
-                </label>
-            </div>
-            <div>
-                <label>
-                    Photo:
+                </div>
+                <div className="form-group">
+                    <label htmlFor="photo">Foto:</label>
                     <input
-                        type="text"
+                        type="file"
+                        id="photo"
                         name="photo"
-                        value={hotel.photo}
-                        onChange={handleChange}
+                        accept="image/*"
+                        onChange={handleFileChange}
                     />
-                </label>
-            </div>
-            <div>
-                <label>
-                    Description:
+                </div>
+                <div className="form-group">
+                    <label htmlFor="description">Descripción:</label>
                     <textarea
+                        id="description"
                         name="description"
-                        value={hotel.description}
+                        value={hotelData.description}
                         onChange={handleChange}
                         required
                     />
-                </label>
-            </div>
-            <div>
-                <label>
-                    Installations:
+                </div>
+                <div className="form-group">
+                    <label htmlFor="installations">Instalaciones:</label>
                     <textarea
+                        id="installations"
                         name="installations"
-                        value={hotel.installations}
+                        value={hotelData.installations}
                         onChange={handleChange}
                         required
                     />
-                </label>
-            </div>
-            <div>
-                <label>
-                    Location:
+                </div>
+                <div className="form-group">
+                    <label htmlFor="location">Ubicación:</label>
                     <input
                         type="text"
+                        id="location"
                         name="location"
-                        value={hotel.location}
+                        value={hotelData.location}
                         onChange={handleChange}
                         required
                     />
-                </label>
-            </div>
-            <div>
-                <label>
-                    Category:
+                </div>
+                <div className="form-group">
+                    <label htmlFor="category">Categoría:</label>
                     <select
+                        id="category"
                         name="category"
-                        value={hotel.category}
+                        value={hotelData.category}
                         onChange={handleChange}
+                        required
                     >
                         <option value="⭐">⭐</option>
                         <option value="⭐⭐">⭐⭐</option>
@@ -124,12 +133,25 @@ export const CreateHotel = () => {
                         <option value="⭐⭐⭐⭐">⭐⭐⭐⭐</option>
                         <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐</option>
                     </select>
-                </label>
-            </div>
-            <button type="submit">Create Hotel</button>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-        </form>
+                </div>
+                <button type="submit" disabled={!isFormValid}>
+                    Crear
+                </button>
+            </form>
+        </div>
     );
+};
+
+CreateHotel.propTypes = {
+    hotelData: PropTypes.shape({
+        nameHotel: PropTypes.string.isRequired,
+        photo: PropTypes.string,
+        description: PropTypes.string.isRequired,
+        installations: PropTypes.string.isRequired,
+        location: PropTypes.string.isRequired,
+        category: PropTypes.string.isRequired,
+        status: PropTypes.bool.isRequired,
+    }),
 };
 
 export default CreateHotel;

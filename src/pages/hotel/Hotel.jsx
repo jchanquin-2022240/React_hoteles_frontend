@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import HotelHeader from '../../components/HotelHeader';
 import HotelCard from '../../components/HotelCard';
-import { getHotels, habitacionesByHotelId} from '../../services/api';
+import SearchBarHotels from '../../components/SearchBarHotels'; 
+import { getHotels, habitacionesByHotelId, getHotelsAvailable } from '../../services/api';
 
 export const Hotel = () => {
 
@@ -17,21 +18,44 @@ export const Hotel = () => {
 
             const result = await getHotels();
             if (result.error) {
-
                 setError(result.e.message);
             } else {
-
                 setHotels(result.hotels);
             }
             setLoading(false);
         };
         fetchHotels();
-        
     }, []);
 
     const handleHotelClick = (id) => {
 
         navigate(`/hotel/${id}`);
+    };
+
+    const handleSearch = async (searchResults) => {
+
+        setLoading(true);
+        try {
+
+            if (searchResults.length > 0) {
+
+                setHotels(searchResults);
+                setError(null);
+            } else {
+                const result = await getHotelsAvailable({});
+                if (result.error) {
+                    setError(result.e.message);
+                } else {
+                    setHotels(result.hotels);
+                    setError(null);
+                }
+            }
+        } catch (error) {
+            console.error('Error searching hotels:', error);
+            setError('Error searching hotels');
+        } finally {
+            setLoading(false);
+        }
     };
 
     if (loading) return <p>Loading hotels...</p>;
@@ -40,6 +64,7 @@ export const Hotel = () => {
     return (
         <div className="hotel-list">
             <HotelHeader />
+            <SearchBarHotels onSearch={handleSearch} /> 
             {hotels.map((hotel) => (
                 <div key={hotel._id} onClick={() => handleHotelClick(hotel._id)} className="hotel-card-wrapper">
                     <HotelCard hotel={hotel} />
