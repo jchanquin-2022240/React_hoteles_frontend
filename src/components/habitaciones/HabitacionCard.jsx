@@ -1,15 +1,13 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import React from "react";
 import toast from 'react-hot-toast';
-//import './habitacionCard.css';
+import './habitacionCard.css';
 
 export const HabitacionCard = ({ habitaciones }) => {
     habitaciones = Array.isArray(habitaciones) ? habitaciones : [];
-    console.log("habitacionesCard", habitaciones)
+    console.log("habitacionesCard", habitaciones);
+
     if (habitaciones.length === 0) {
         return <div className="no-habitaciones">No hay habitaciones disponibles</div>;
-
     }
 
     const handleUpdateClick = () => {
@@ -26,23 +24,23 @@ export const HabitacionCard = ({ habitaciones }) => {
             {habitaciones.map((habitacion, index) => (
                 <div key={index} className="habitacion-card">
                     <div>
-                        <label>Número:</label>
+                        <label><i className="icon">🔢</i>Número:</label>
                         <div>{habitacion.numero}</div>
                     </div>
                     <div>
-                        <label>Tipo:</label>
+                        <label><i className="icon">🏷️</i>Tipo:</label>
                         <div>{habitacion.tipo}</div>
                     </div>
                     <div>
-                        <label>Capacidad:</label>
+                        <label><i className="icon">👥</i>Capacidad:</label>
                         <div>{habitacion.capacidad}</div>
                     </div>
                     <div>
-                        <label>Precio:</label>
+                        <label><i className="icon">💵</i>Precio:</label>
                         <div>${habitacion.precio}</div>
                     </div>
                     <div>
-                        <label>Hotel:</label>
+                        <label><i className="icon">🏨</i>Hotel:</label>
                         <div>{habitacion.idHotel}</div>
                     </div>
                     <button className="update" onClick={handleUpdateClick}>Actualizar</button>

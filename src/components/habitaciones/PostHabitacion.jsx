@@ -8,8 +8,7 @@ import {
     validateHabitacionNumero,
     validateHabitacionIdHotel
 } from "../../shared/validators";
-
-//import "./postHabitacion.css";
+import "./postHabitacion.css";
 
 export const PostHabitacion = () => {
     const { postHabitacion, isLoading } = usePostHabitacion();
