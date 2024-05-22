@@ -3,10 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { PostHabitacion } from '../../components/habitaciones/PostHabitacion';
 import { HabitacionCard } from '../../components/habitaciones/HabitacionCard';
 import { habitacionesByHotelId } from '../../services';
+import { Navbar } from '../../components/complementos/Navbar';
+import { Footer } from '../../components/complementos/Footer';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const HabitacionesPage = () => {
   const [habitaciones, setHabitaciones] = useState([]);
+  const navigate = useNavigate();
   console.log('Habitaciones:', habitaciones)
   const id = useParams().id;
   useEffect(() => {
@@ -29,11 +33,20 @@ export const HabitacionesPage = () => {
     fetchHabitaciones();
   }, []);
 
+  const handleHotelClick = () => {
+
+    navigate(`/`);
+  };
+
   return (
     <div className="habitacion-dashboard">
-      <h2>Habitaciones</h2>
+      <Navbar />
+      <button className="button-img" onClick={handleHotelClick} >
+        <img src="../../src/assets/img/back.png" />
+      </button>
       <PostHabitacion />
       <HabitacionCard habitaciones={habitaciones} />
+      <Footer />
     </div>
   );
 };

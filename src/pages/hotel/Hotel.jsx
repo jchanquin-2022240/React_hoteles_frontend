@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import HotelHeader from '../../components/HotelHeader';
 import HotelCard from '../../components/HotelCard';
 import SearchBarHotels from '../../components/SearchBarHotels'; 
+import { Navbar } from '../../components/complementos/Navbar';
+import { Footer } from '../../components/complementos/Footer';
 import { getHotels, habitacionesByHotelId, getHotelsAvailable } from '../../services/api';
 
 export const Hotel = () => {
@@ -63,6 +65,7 @@ export const Hotel = () => {
 
     return (
         <div className="hotel-list">
+            <Navbar />
             <HotelHeader />
             <SearchBarHotels onSearch={handleSearch} /> 
             {hotels.map((hotel) => (
@@ -70,6 +73,7 @@ export const Hotel = () => {
                     <HotelCard hotel={hotel} />
                 </div>
             ))}
+            <Footer />
         </div>
     );
 };
