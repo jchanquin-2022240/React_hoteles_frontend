@@ -1,4 +1,4 @@
 export const validateHabitacionTipo = (tipo) => {
-    const tiposValidos = ["simple", "doble", "suite"];
+    const tiposValidos = ["individual", "doble", "suite"];
     return tiposValidos.includes(tipo.toLowerCase());
 }

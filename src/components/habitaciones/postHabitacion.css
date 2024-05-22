@@ -1,19 +1,12 @@
 /* Estilos generales */
 :root {
-    --primary-color: #FDC300;
-    /* Color principal, amarillo dorado */
-    --secondary-color: #213547;
-    /* Color secundario, azul oscuro */
-    --background-color: #ffffff;
-    /* Color de fondo */
-    --text-color: #213547;
-    /* Color de texto */
-    --input-border-color: #e0e0e0;
-    /* Color del borde de los inputs */
-    --button-hover-color: #f9a825;
-    /* Color del botón en hover */
-    --error-color: #ff1744;
-    /* Color de error */
+    --primary-color: #FDC300; /* Color principal, amarillo dorado */
+    --secondary-color: #213547; /* Color secundario, azul oscuro */
+    --background-color: #ffffff; /* Color de fondo */
+    --text-color: #213547; /* Color de texto */
+    --input-border-color: #e0e0e0; /* Color del borde de los inputs */
+    --button-hover-color: #f9a825; /* Color del botón en hover */
+    --error-color: #ff1744; /* Color de error */
 }
 
 body {
@@ -27,12 +20,9 @@ body {
 
 /* Estilos específicos para el contenedor de post-habitación */
 .post-habitacion-container {
-    max-width: 500px;
-    /* Ancho máximo del contenedor */
-    margin: 0 auto;
-    /* Centrar el contenedor horizontalmente */
-    padding: 20px;
-    /* Agregar un espacio interior */
+    max-width: 500px; /* Ancho máximo del contenedor */
+    margin: 0 auto; /* Centrar el contenedor horizontalmente */
+    padding: 20px; /* Agregar un espacio interior */
     background-color: #f3f3e4;
     border-radius: 15px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -45,8 +35,7 @@ body {
     margin-bottom: 20px;
     text-align: center;
     color: #000000;
-    background-color: var(--primary-color);
-    /* Fondo amarillo dorado */
+    background-color: var(--primary-color); /* Fondo amarillo dorado */
     padding: 10px;
     border-radius: 10px;
 }
@@ -90,10 +79,8 @@ input.error {
 button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: var(--secondary-color);
-    /* Azul oscuro */
-    color: #ffffff;
-    /* Blanco */
+    background-color: var(--secondary-color); /* Azul oscuro */
+    color: #ffffff; /* Blanco */
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -102,14 +89,11 @@ button {
 }
 
 button:disabled {
-    background-color: #999999;
-    /* Gris para botón deshabilitado */
+    background-color: #999999; /* Gris para botón deshabilitado */
     cursor: not-allowed;
 }
 
 button:hover:not(:disabled) {
-    background-color: var(--button-hover-color);
-    /* Amarillo dorado en hover */
-    color: #000000;
-    /* Negro en hover */
+    background-color: var(--button-hover-color); /* Amarillo dorado en hover */
+    color: #000000; /* Negro en hover */
 }

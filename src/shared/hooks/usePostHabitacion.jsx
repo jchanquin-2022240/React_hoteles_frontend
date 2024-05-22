@@ -5,14 +5,15 @@ import toast from "react-hot-toast";
 export const usePostHabitacion = () => {
     const [isLoading, setIsLoading] = useState(false);
 
-    const postHabitacion = async (nombre, tipo, capacidad, precio) => {
+    const postHabitacion = async (numero, tipo, capacidad, precio, idHotel) => {
         setIsLoading(true);
 
         const response = await postHabitacionRequest({
-            nombre,
+            numero,
             tipo,
             capacidad,
-            precio
+            precio,
+            idHotel
         });
 
         setIsLoading(false);

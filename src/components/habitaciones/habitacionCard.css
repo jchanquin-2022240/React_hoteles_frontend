@@ -1,19 +1,12 @@
 /* Estilos generales */
 :root {
-    --primary-color: #FDC300;
-    /* Color principal, amarillo dorado */
-    --secondary-color: #213547;
-    /* Color secundario, azul oscuro */
-    --background-color: #ffffff;
-    /* Color de fondo */
-    --text-color: #213547;
-    /* Color de texto */
-    --input-border-color: #e0e0e0;
-    /* Color del borde de los inputs */
-    --button-hover-color: #f9a825;
-    /* Color del botón en hover */
-    --error-color: #ff1744;
-    /* Color de error */
+    --primary-color: #FDC300; /* Color principal, amarillo dorado */
+    --secondary-color: #213547; /* Color secundario, azul oscuro */
+    --background-color: #ffffff; /* Color de fondo */
+    --text-color: #213547; /* Color de texto */
+    --input-border-color: #e0e0e0; /* Color del borde de los inputs */
+    --button-hover-color: #f9a825; /* Color del botón en hover */
+    --error-color: #ff1744; /* Color de error */
 }
 
 body {
@@ -30,12 +23,9 @@ body {
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
-    max-width: 800px;
-    /* Ancho máximo del contenedor */
-    margin: 0 auto;
-    /* Centrar el contenedor horizontalmente */
-    padding: 20px;
-    /* Agregar un espacio interior */
+    max-width: 800px; /* Ancho máximo del contenedor */
+    margin: 0 auto; /* Centrar el contenedor horizontalmente */
+    padding: 20px; /* Agregar un espacio interior */
 }
 
 .h {
@@ -44,8 +34,7 @@ body {
     margin-bottom: 20px;
     text-align: center;
     color: #000000;
-    background-color: var(--primary-color);
-    /* Fondo amarillo dorado */
+    background-color: var(--primary-color); /* Fondo amarillo dorado */
     padding: 10px;
     border-radius: 10px;
 }
@@ -89,41 +78,33 @@ body {
 
 /* Estilos para el botón "Ver más" */
 .habitacion-card a {
-    color: var(--primary-color);
-    /* Amarillo dorado */
+    color: var(--primary-color); /* Amarillo dorado */
     text-decoration: none;
     font-weight: bold;
 }
 
-.update,
-.delete {
+.update, .delete {
     padding: 10px 20px;
     font-size: 16px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    color: #ffffff;
-    /* Color de texto blanco */
+    color: #ffffff; /* Color de texto blanco */
 }
 
 .update {
-    background-color: var(--secondary-color);
-    /* Azul oscuro */
+    background-color: var(--secondary-color); /* Azul oscuro */
 }
 
 .update:hover {
-    background-color: var(--button-hover-color);
-    /* Amarillo dorado en hover */
-    color: #000000;
-    /* Cambia el color del texto a negro en hover */
+    background-color: var(--button-hover-color); /* Amarillo dorado en hover */
+    color: #000000; /* Cambia el color del texto a negro en hover */
 }
 
 .delete {
-    background-color: var(--error-color);
-    /* Rojo */
+    background-color: var(--error-color); /* Rojo */
 }
 
 .delete:hover {
-    background-color: #d50000;
-    /* Rojo oscuro en hover */
+    background-color: #d50000; /* Rojo oscuro en hover */
 }
