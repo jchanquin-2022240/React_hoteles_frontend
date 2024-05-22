@@ -28,6 +28,7 @@ export const deleteHabitacion = async (id) => {
 };
 
 export const postHabitacion = async (data) => {
+    console.log("estoy mandando data",data)
     try {
         return await apiClient.post('/habitaciones', data)
     } catch (e) {
