@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { ReservacionCard } from '../../components/reservacion/ReservacionCard';
 import { PostReservacion } from '../../components/reservacion/PostReservacion';
-import { getReservaciones } from '../../services';
+import { habitacionesByHotelId } from '../../services';
 
 export const ReservacionesPage = () => {
   const [reservaciones, setReservaciones] = useState([]);
@@ -10,7 +10,7 @@ export const ReservacionesPage = () => {
   useEffect(() => {
     const fetchReservaciones = async () => {
       try {
-        const response = await getReservaciones();
+        const response = await habitacionesByHotelId();
         console.log('Datos obtenidos:', response.data);
         if (!response.error) {
           setReservaciones(response.data.reservaciones || []);

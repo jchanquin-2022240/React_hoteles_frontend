@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { getReservaciones as getReservacionesRequest} from '../../services/index';
+import { habitacionesByHotelId as getReservacionesRequest} from '../../services/index';
 
 
 export const useReservacion = () => {

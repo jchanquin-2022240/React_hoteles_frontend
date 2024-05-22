@@ -1,8 +1,18 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React from "react";
 import toast from 'react-hot-toast';
+//import { navigate } from 'react-router-dom';
 import './habitacionCard.css';
 
 export const HabitacionCard = ({ habitaciones }) => {
+
+    const handleHabitacionClick = (id) => {
+
+        navigate(`/habitacion/${id}`);
+    };
+
     habitaciones = Array.isArray(habitaciones) ? habitaciones : [];
     console.log("habitacionesCard", habitaciones);
 
@@ -39,8 +49,8 @@ export const HabitacionCard = ({ habitaciones }) => {
                         <label><i className="icon">💵</i>Precio:</label>
                         <div>${habitacion.precio}</div>
                     </div>
-                    <button className="delete">
-                        Reservar
+                    <button key={habitacion._id} onClick={() => handleHabitacionClick(habitacion._id)}>
+                        ver habitaciones
                     </button>
                     <button className="update" onClick={handleUpdateClick}>Actualizar</button>
                     <button className="delete" onClick={handleDeleteClick}>Eliminar</button>

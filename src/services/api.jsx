@@ -115,3 +115,40 @@ export const habitacionesByHotelId = async (id) => {
     }
 };
 
+
+
+/*export const getReservaciones = async () => {
+    try {
+        return await apiClient.get('/reservacion/')
+    } catch (e) {
+        return{
+            error: true,
+            e
+        }
+    }
+}*/
+
+export const postReservacion = async (data) => {
+    try {
+        return await apiClient.post('/reservacion', data)
+    } catch (e) {
+        return{
+            error: true,
+            e
+        }
+    }
+}
+
+export const reservacionesByHabitacionId = async (id) => {
+    try {
+        const response = await apiClient.get(`/reservacion/habitacion/${id}`);
+        return response.data; // Devuelve los datos de la respuesta
+    } catch (e) {
+        console.error('Error fetching habitaciones:', e);
+        return {
+            error: true,
+            message: e.message
+        };
+    }
+};
+
