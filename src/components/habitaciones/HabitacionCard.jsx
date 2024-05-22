@@ -1,17 +1,11 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
-import React from "react";
-import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useDeleteHabitacion } from "../../shared/hooks";
+import EditHabitacion from "../../components/habitaciones/EditHabitacion";
 import './habitacionCard.css';
 
-export const HabitacionCard = ({ habitaciones }) => {
-    const navigate = useNavigate();
-    const handleHabitacionClick = (id) => {
-        console.log("id del hotel para reservar", id)
-        navigate(`/habitacion/${id}`);
-    };
+export const HabitacionCard = ({ habitaciones, onHabitacionDeleted }) => {
+    const { deleteHabitacion, isLoading: isDeleting } = useDeleteHabitacion();
+    const [editingHabitacion, setEditingHabitacion] = useState(null);
 
     habitaciones = Array.isArray(habitaciones) ? habitaciones : [];
     console.log("habitacionesCard", habitaciones);
@@ -20,12 +14,26 @@ export const HabitacionCard = ({ habitaciones }) => {
         return <div className="no-habitaciones">No hay habitaciones disponibles</div>;
     }
 
-    const handleUpdateClick = () => {
-        toast.error("Necesitas un administrador para actualizar la habitación");
+    const handleEditClick = (habitacion) => {
+        setEditingHabitacion(habitacion);
     };
 
-    const handleDeleteClick = () => {
-        toast.error("Comunícate con el administrador para cancelar y eliminar la habitación");
+    const handleDeleteClick = async (id) => {
+        const confirmed = window.confirm("¿Estás seguro de que deseas eliminar esta habitación?");
+        if (confirmed) {
+            try {
+                await deleteHabitacion(id);
+                if (onHabitacionDeleted) {
+                    onHabitacionDeleted(id);
+                }
+            } catch (error) {
+                console.error("Error al eliminar la habitación:", error);
+            }
+        }
+    };
+
+    const handleCloseModal = () => {
+        setEditingHabitacion(null);
     };
 
     return (
@@ -49,13 +57,18 @@ export const HabitacionCard = ({ habitaciones }) => {
                         <label><i className="icon">💵</i>Precio:</label>
                         <div>${habitacion.precio}</div>
                     </div>
-                    <button key={habitacion._id} onClick={() => handleHabitacionClick(habitacion._id)}>
-                        Reservar
-                    </button>
-                    <button className="update" onClick={handleUpdateClick}>Actualizar</button>
-                    <button className="delete" onClick={handleDeleteClick}>Eliminar</button>
+                    <div>
+                        <label><i className="icon">🏨</i>Hotel:</label>
+                        <div>{habitacion.idHotel}</div>
+                    </div>
+                    <button className="update" onClick={() => handleEditClick(habitacion)}>Actualizar</button>
+                    <button className="delete" onClick={() => handleDeleteClick(habitacion._id)} disabled={isDeleting}>Eliminar</button>
                 </div>
             ))}
+
+            {editingHabitacion && (
+                <EditHabitacion habitacion={editingHabitacion} onClose={handleCloseModal} />
+            )}
         </div>
     );
-}
+};

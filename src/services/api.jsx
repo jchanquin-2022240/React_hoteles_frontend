@@ -115,6 +115,25 @@ export const habitacionesByHotelId = async (id) => {
     }
 };
 
+export const deleteHabitacion = async (id) => {
+    try {
+        return await apiClient.delete(`/habitaciones/${id}`);
+    } catch (e) {
+        return {
+            error: true,
+            e
+        };
+    }
+};
+
+export const putHabitacion = async (id, data) => {
+    try {
+        return await apiClient.put(`/habitaciones/${id}`, data);
+    } catch (e) {
+        return { error: true, e };
+    }
+};
+
 
 
 export const getReservaciones = async () => {

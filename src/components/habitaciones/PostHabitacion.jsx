@@ -87,6 +87,7 @@ export const PostHabitacion = () => {
 
         if (result) {
             setFormState(initialFormState);
+            window.location.reload();
         }
     };
 
