@@ -1,8 +1,11 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import HotelHeader from '../../components/HotelHeader';
 import HotelCard from '../../components/HotelCard';
 import { getHotels, habitacionesByHotelId} from '../../services/api';
+import { Navbar } from '../../components/complementos/Navbar';
+import { Footer } from '../../components/complementos/Footer';
 
 export const Hotel = () => {
 
@@ -39,12 +42,14 @@ export const Hotel = () => {
 
     return (
         <div className="hotel-list">
+            <Navbar />
             <HotelHeader />
             {hotels.map((hotel) => (
                 <div key={hotel._id} onClick={() => handleHotelClick(hotel._id)} className="hotel-card-wrapper">
                     <HotelCard hotel={hotel} />
                 </div>
             ))}
+            <Footer />
         </div>
     );
 };

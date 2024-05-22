@@ -5,6 +5,8 @@ import { PostReservacion } from '../../components/reservacion/PostReservacion';
 //import { reservacionesByHabitacionId } from '../../services';
 import { getReservaciones as getReservacionesRequest } from '../../services';
 // import { useParams } from 'react-router-dom';
+import { Navbar } from '../../components/complementos/Navbar';
+import { Footer } from '../../components/complementos/Footer';  
 
 export const ReservacionesPage = () => {
   const [reservaciones, setReservaciones] = useState([]);
@@ -31,8 +33,10 @@ export const ReservacionesPage = () => {
 
   return (
     <div>
+      <Navbar />  
           <PostReservacion />
       <ReservacionCard reservaciones={reservaciones} />
+      <Footer />
     </div>
   );
 };

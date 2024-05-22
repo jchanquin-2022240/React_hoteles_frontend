@@ -4,6 +4,8 @@ import { PostHabitacion } from '../../components/habitaciones/PostHabitacion';
 import { HabitacionCard } from '../../components/habitaciones/HabitacionCard';
 import { habitacionesByHotelId } from '../../services';
 import { useParams } from 'react-router-dom';
+import { Navbar } from '../../components/complementos/Navbar';
+import { Footer } from '../../components/complementos/Footer';
 
 export const HabitacionesPage = () => {
   const [habitaciones, setHabitaciones] = useState([]);
@@ -31,9 +33,11 @@ export const HabitacionesPage = () => {
 
   return (
     <div className="habitacion-dashboard">
+      <Navbar />
       <h2>Habitaciones</h2>
       <PostHabitacion />
       <HabitacionCard habitaciones={habitaciones} />
+      <Footer />
     </div>
   );
 };
