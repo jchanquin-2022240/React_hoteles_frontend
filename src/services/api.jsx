@@ -43,17 +43,6 @@ export const register = async (data) => {
     }
 }
 
-// export const getHabitaciones = async () => {
-//     try {
-//         return await apiClient.get('/habitaciones/')
-//     } catch (e) {
-//         return{
-//             error: true,
-//             e
-//         }
-//     }
-// }
-
 export const postHabitacion = async (data) => {
     try {
         return await apiClient.post('/habitaciones', data)
@@ -77,17 +66,6 @@ export const getHotels = async () => {
     }
 };
 
-export const getHotelsDetails = async (id) => {
-    try {
-        const response = await apiClient.get(`/hotelDetails/${id}`);
-        return response.data;
-    } catch (e) {
-        return {
-            error: true,
-            e,
-        };
-    }
-};
 
 export const getHotelsAvailable = async (searchQuery) => {
     try {
@@ -98,6 +76,16 @@ export const getHotelsAvailable = async (searchQuery) => {
         return response.data;
     } catch (error) {
         console.error('Error getting available hotels:', error);
+        throw error;
+    }
+};
+
+export const getHotelDetails = async (id) => {
+    try {
+        const response = await apiClient.get(`/hotel/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error getting hotel details:', error);
         throw error;
     }
 };
@@ -113,6 +101,19 @@ export const createHotel = async (data) => {
         };
     }
 }
+
+export const updateHotel = async (id, data) => {
+    try {
+        const response = await apiClient.put(`/hotel/update/${id}`, data);
+        return response.data;
+    } catch (e) {
+        return {
+            error: true,
+            e
+        };
+    }
+};
+
 
 export const deleteHotel = async (id) => {
     try {

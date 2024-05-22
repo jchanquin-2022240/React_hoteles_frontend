@@ -11,20 +11,21 @@ export const HotelCard = ({ hotel }) => {
     const navigate = useNavigate();
 
     const handleHotelClick = (id) => {
-
         navigate(`/hotel/habitaciones/${id}`);
     };
 
-    const handleDeleteClick = async (id, event) => {
+    const handleEditClick = (id, event) => {
+        event.stopPropagation();
+        navigate(`/hotel/update/${id}`);
+    };
 
-        event.stopPropagation(); 
+    const handleDeleteClick = async (id, event) => {
+        event.stopPropagation();
         try {
             const response = await deleteHotel(id);
             if (response.error) {
-
                 console.error('Error deleting hotel:', response.e);
             } else {
-
                 window.location.reload();
             }
         } catch (error) {
@@ -55,7 +56,7 @@ export const HotelCard = ({ hotel }) => {
                         <p>Status: {hotel.status ? "Open" : "Closed"}</p>
                     </div>
                     <div className="hotel-buttons">
-                        <button className="edit-button" onClick={(event) => event.stopPropagation()}>Editar</button>
+                        <button className="edit-button" onClick={(event) => handleEditClick(hotel._id, event)}>Editar</button>
                         <button className="delete-button" onClick={(event) => handleDeleteClick(hotel._id, event)}>Eliminar</button>
                         <button className="view-rooms-button" onClick={(event) => {
                             event.stopPropagation();
